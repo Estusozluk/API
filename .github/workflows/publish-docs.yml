@@ -37,4 +37,4 @@ jobs:
         username: ${{ secrets.FTPNAME }}
         password: ${{ secrets.FTPPASSWORD }}
         local-dir: apidoc/
-        server-dir: docs.solarproject.click/
+        server-dir: docs.solarproject.click/v1/
