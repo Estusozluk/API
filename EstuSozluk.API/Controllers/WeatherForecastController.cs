@@ -23,6 +23,7 @@ namespace EstuSozluk.API.Controllers
             _logger = logger;
         }
 
+
         /**
          * @api {get} /weatherforecast Returns random forecast of weather.
          * @apiName GetUser

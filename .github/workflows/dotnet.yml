@@ -17,22 +17,25 @@ jobs:
       uses: actions/setup-dotnet@v3
       with:
         dotnet-version: 3.1.x
+
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Publish
+      run: dotnet publish --no-build
     - name: files
       run: ls
-    - name: log
-      run: find . -type f
-    - name: initial
-      run: |
-        FILECOUNT=$(ls | wc -l)
-        echo $FILECOUNT
-        if [ $FILECOUNT -ne 2 ]; then
-          echo "Failed!"
-          exit 1;
-        fi
-        echo "passed!"
-    #- name: Restore dependencies
-    #  run: dotnet restore
-    #- name: Build
-    #  run: dotnet build --no-restore
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ${{ secrets.FTPSERVER }}
+        username: ${{ secrets.FTPNAME }}
+        password: ${{ secrets.FTPPASSWORD }}
+        local-dir: EstuSozluk.API/bin/Debug/netcoreapp3.1/publish/
+        server-dir: api/
+        exclude: |
+          appsettings.json
