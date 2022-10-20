@@ -23,6 +23,18 @@ namespace EstuSozluk.API.Controllers
             _logger = logger;
         }
 
+
+        /**
+         * @api {get} /weatherforecast Returns random forecast of weather.
+         * @apiName GetUser
+         * @apiGroup Weather
+         *
+         *
+         * @apiSuccess {DateTime} date Current date.
+         * @apiSuccess {int} temperatureC  Celcius of temperature.
+         * @apiSuccess {int} temperatureF  Fahreneit of temperature.
+         * @apiSuccess {String} summary  Summary of result.
+         */
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {

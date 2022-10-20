@@ -28,8 +28,9 @@ jobs:
       run: ls
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
-    
+  
     - name: 📂 Sync files
+      if: ${{ github.ref == 'refs/heads/main' }}
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
         server: ${{ secrets.FTPSERVER }}
