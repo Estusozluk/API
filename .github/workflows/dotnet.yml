@@ -2,7 +2,7 @@ name: .NET
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main", "init-dotnet-with-ftp-cd" ]
   pull_request:
     branches: [ "main" ]
 
@@ -36,3 +36,15 @@ jobs:
     #  run: dotnet build --no-restore
     #- name: Test
     #  run: dotnet test --no-build --verbosity normal
+    
+    - name: 📂 Sync files
+      uses: SamKirkland/FTP-Deploy-Action@4.3.2
+      with:
+        server: ${{FTPSERVER}}
+        username: ${{FTPNAME}}
+        password: ${{FTPPASSWORD}}
+        dry-run: true
+        exclude: |
+          **/.git*
+          **/.git*/**
+          LICENSE
