@@ -2,7 +2,7 @@ name: .NET
 
 on:
   push:
-    branches: [ "main", "init-dotnet-with-ftp-cd" ]
+    branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
 
@@ -38,6 +38,4 @@ jobs:
         local-dir: EstuSozluk.API/bin/Debug/netcoreapp3.1/publish/
         server-dir: api/
         exclude: |
-          **/.git*
-          **/.git*/**
-          LICENSE
+          appsettings.json
