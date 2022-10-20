@@ -35,8 +35,8 @@ jobs:
         server: ${{ secrets.FTPSERVER }}
         username: ${{ secrets.FTPNAME }}
         password: ${{ secrets.FTPPASSWORD }}
-        dry-run: true
         local-dir: EstuSozluk.API/bin/Debug/netcoreapp3.1/publish/
+        server-dir: api/
         exclude: |
           **/.git*
           **/.git*/**
