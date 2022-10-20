@@ -9,7 +9,6 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     
     strategy:
@@ -29,7 +28,9 @@ jobs:
     
     - name: Create Docs
       run: apidoc -i EstuSozluk.API/ -o apidoc/
-
+   
+   publish:
+    if: ${{ github.ref == 'refs/heads/main' }}
     - name: 📂 Sync files
       uses: SamKirkland/FTP-Deploy-Action@4.3.2
       with:
