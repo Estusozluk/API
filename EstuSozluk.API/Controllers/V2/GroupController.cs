@@ -5,11 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EstuSozluk.API.Controllers
+namespace EstuSozluk.API.Controllers.V1
 {
     [ApiController]
-    [Route("[controller]")]
-    public class WeatherForecastController : ControllerBase
+    [Route("v{version:apiVersion}/[controller]")]
+    [ApiVersion("2.0")]
+    public class GroupController : ControllerBase
     {
         private static readonly string[] Summaries = new[]
         {
@@ -18,23 +19,16 @@ namespace EstuSozluk.API.Controllers
 
         private readonly ILogger<WeatherForecastController> _logger;
 
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        public GroupController(ILogger<WeatherForecastController> logger)
         {
             _logger = logger;
         }
 
-
-        /**
-         * @api {get} /weatherforecast Returns random forecast of weather.
-         * @apiName GetUser
-         * @apiGroup Weather
-         *
-         *
-         * @apiSuccess {DateTime} date Current date.
-         * @apiSuccess {int} temperatureC  Celcius of temperature.
-         * @apiSuccess {int} temperatureF  Fahreneit of temperature.
-         * @apiSuccess {String} summary  Summary of result.
-         */
+        /// <summary>
+        /// returns random weather forecast.
+        /// </summary>
+        /// <returns>object</returns>
+        [MapToApiVersion("2.0")]
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
