@@ -1,19 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using Serilog;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace EstuSozluk.API
 {
@@ -30,6 +22,18 @@ namespace EstuSozluk.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: "Cors",
+                    policy =>
+                    {
+                        policy
+                            .WithOrigins("https://docs.solarproject.click", "https://www.solarproject.click")
+                            .AllowAnyHeader()
+                            .AllowAnyMethod();
+                    });
+            });
 
             services.AddApiVersioning(setup =>
             {
@@ -62,13 +66,7 @@ namespace EstuSozluk.API
 
             app.UseHttpsRedirection();
 
-            app.UseCors((configuration) =>
-            {
-                configuration
-                    .WithOrigins("https://docs.solarproject.click/", "https://www.solarproject.click/")
-                    .AllowAnyMethod()
-                    .AllowAnyHeader();
-            });
+            app.UseCors("Cors");
 
             app.UseAuthentication();
             app.UseAuthorization();
