@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -7,6 +8,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,7 +64,29 @@ namespace EstuSozluk.API
 
             app.UseCors((configuration) =>
             {
-                configuration.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader();
+                configuration
+                    .WithOrigins("https://docs.solarproject.click/", "https://www.solarproject.click/")
+                    .AllowAnyMethod()
+                    .AllowAnyHeader();
+            });
+
+            app.UseAuthentication();
+            app.UseAuthorization();
+
+            app.UseSerilogRequestLogging(options =>
+            {
+                //// Customize the message template
+                //options.MessageTemplate = "Handled {RequestPath}";
+
+                //// Emit debug-level events instead of the defaults
+                //options.GetLevel = (httpContext, elapsed, ex) => LogEventLevel.Debug;
+
+                //// Attach additional properties to the request completion event
+                //options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+                //{
+                //    diagnosticContext.Set("RequestHost", httpContext.Request.Host.Value);
+                //    diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+                //};
             });
 
 
