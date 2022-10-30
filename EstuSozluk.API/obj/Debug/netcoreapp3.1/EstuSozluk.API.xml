@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>EstuSozluk.API</name>
+    </assembly>
+    <members>
+        <member name="M:EstuSozluk.API.Controllers.V1.WeatherForecastController.Get">
+            <summary>
+            returns random weather forecast.
+            </summary>
+            <returns>object</returns>
+        </member>
+        <member name="M:EstuSozluk.API.Controllers.V1.GroupController.Get">
+            <summary>
+            returns random weather forecast.
+            </summary>
+            <returns>object</returns>
+        </member>
+    </members>
+</doc>

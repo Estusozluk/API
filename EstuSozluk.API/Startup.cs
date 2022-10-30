@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MySql.Data.MySqlClient;
 using Serilog;
 
 namespace EstuSozluk.API
@@ -53,6 +54,8 @@ namespace EstuSozluk.API
 
             services.AddSwaggerGen();
             services.ConfigureOptions<ConfigureSwaggerOptions>();
+
+            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionString:Default"]));
 
         }
 
