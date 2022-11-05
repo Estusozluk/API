@@ -27,7 +27,7 @@ namespace EstuSozluk.API.Controllers.V1
             _config = config;
 
         }
-
+        /*
         [AllowAnonymous]
         [HttpPost]
         public IActionResult Login([FromBody] UserLogin userLogin)
@@ -74,5 +74,6 @@ namespace EstuSozluk.API.Controllers.V1
             return null;
 
         }
+        */
     }
 }

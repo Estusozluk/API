@@ -1,20 +1,25 @@
 using System.Text;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+using EstuSozluk.API.Repositories;
+
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
 using MySql.Data.MySqlClient;
+using MySqlConnector.Logging;
 using Serilog;
 
 namespace EstuSozluk.API
 {
     public class Startup
     {
+        //private static readonly LoggerFactory ConsoleLoggerFactory = new LoggerFactory(providers: new[] { new ConsoleLoggerProvider((_, __) => true, true) });
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,7 +30,10 @@ namespace EstuSozluk.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllersWithViews()
+            .AddNewtonsoftJson(options =>
+             options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+);
 
             services.AddCors(options =>
             {
@@ -58,9 +66,9 @@ namespace EstuSozluk.API
             services.AddSwaggerGen();
             services.ConfigureOptions<ConfigureSwaggerOptions>();
 
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionString:Default"]));
+            // services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionString:Default"]));
 
-
+            /*
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options => {
                     options.TokenValidationParameters = new TokenValidationParameters
@@ -74,9 +82,16 @@ namespace EstuSozluk.API
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
+            */
             services.AddMvc();
             services.AddControllers();
             services.AddRazorPages();
+
+            services.AddDbContext<EstuSozlukContext>(options => {
+                options.UseMySQL(Configuration["ConnectionStrings:Default"]);
+            });
+
+
 
         }
 
