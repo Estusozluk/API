@@ -41,14 +41,42 @@ namespace EstuSozluk.API.Repositories
                 .WithMany(t => t.Followed)
                 .HasForeignKey(et => et.followed);
 
-            
 
+            modelBuilder.Entity<LikedEntries>()
+                .HasKey(e => new { e.likedentryid, e.userid });
+
+            modelBuilder.Entity<DislikedEntries>()
+                .HasKey(e => new { e.dislikedentryid, e.userid });
+
+
+            modelBuilder.Entity<LikedEntries>()
+                .HasOne(e => e.user)
+                .WithMany(z => z.LikedEntries)
+                .HasForeignKey(ez => ez.userid);
+
+            modelBuilder.Entity<LikedEntries>()
+                 .HasOne(e => e.entry)
+                 .WithMany(z => z.LikedEntries)
+                 .HasForeignKey(ez => ez.likedentryid);
+
+
+            modelBuilder.Entity<DislikedEntries>()
+                .HasOne(e => e.user)
+                .WithMany(z => z.DislikedEntries)
+                .HasForeignKey(ez => ez.userid);
+
+            modelBuilder.Entity<DislikedEntries>()
+                 .HasOne(e => e.entry)
+                 .WithMany(z => z.DislikedEntries)
+                 .HasForeignKey(ez => ez.dislikedentryid);
         }
 
         public DbSet<User> Users { get; set; }
         public DbSet<Permissions> Permissions { get; set; }
         public DbSet<Entry> Entries { get; set; }
         public DbSet<Followships> Followships { get; set; }
+        public DbSet<LikedEntries> LikedEntries { get; set; }
+        public DbSet<DislikedEntries> DislikedEntries { get; set; }
 
     }
 }
