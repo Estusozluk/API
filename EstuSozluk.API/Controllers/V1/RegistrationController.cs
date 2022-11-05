@@ -1,9 +1,8 @@
-﻿using System;
-using System.Data;
-using EstuSozluk.API.Models;
+﻿using EstuSozluk.API.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using System.Data;
 
 namespace EstuSozluk.API.Controllers.V1
 {
@@ -23,7 +22,7 @@ namespace EstuSozluk.API.Controllers.V1
         public string RegisterNewUser(User user)
         {
             MySqlConnection con = new MySqlConnection(_configuration.GetConnectionString("Default").ToString());
-            MySqlCommand command = new MySqlCommand("INSERT INTO Users(username, email, password, userrole) VALUES('"+user.username+ "', '" + user.email + "', '" + user.password + "', '" + user.roleId + "')", con);
+            MySqlCommand command = new MySqlCommand("INSERT INTO Users(username, email, password, userrole) VALUES('" + user.username + "', '" + user.email + "', '" + user.password + "', '" + user.userrole + "')", con);
             con.Open();
             int i = command.ExecuteNonQuery();
             con.Close();
@@ -54,7 +53,7 @@ namespace EstuSozluk.API.Controllers.V1
 
             da.Fill(dt);
 
-            if(dt.Rows.Count > 0)
+            if (dt.Rows.Count > 0)
             {
                 return "Login Successfully!";
             }

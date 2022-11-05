@@ -1,10 +1,14 @@
+using EstuSozluk.API.Repositories;
+using EstuSozluk.API.Services;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Logging;
 using MySql.Data.MySqlClient;
 using Serilog;
 
@@ -23,6 +27,7 @@ namespace EstuSozluk.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+
 
             services.AddCors(options =>
             {
@@ -55,7 +60,27 @@ namespace EstuSozluk.API
             services.AddSwaggerGen();
             services.ConfigureOptions<ConfigureSwaggerOptions>();
 
-            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionString:Default"]));
+            services.AddControllers().AddNewtonsoftJson(options =>
+                options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
+
+            services.AddTransient<MySqlConnection>(_ => new MySqlConnection(Configuration["ConnectionStrings:Default"]));
+            services.AddDbContext<EstuSozlukDbContext>(options =>
+            {
+                ILoggerFactory _loggerFactory = LoggerFactory.Create(builder =>
+                {
+                    builder
+                    .AddConsole((options) => { })
+                    .AddFilter((category, level) =>
+                        category == DbLoggerCategory.Database.Command.Name
+                 && level == LogLevel.Information);
+                });
+                options.UseMySQL(Configuration["ConnectionStrings:Default"]);
+                options.UseLoggerFactory(_loggerFactory);
+            });
+            services.AddTransient<IEntryService, EntryService>();
+
+
 
         }
 
