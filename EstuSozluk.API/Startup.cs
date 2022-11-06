@@ -1,6 +1,7 @@
 using System.Text;
 using EstuSozluk.API.Repositories;
-
+using EstuSozluk.API.Services.Abstracts;
+using EstuSozluk.API.Services.Concretes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -90,6 +91,8 @@ namespace EstuSozluk.API
             services.AddDbContext<EstuSozlukContext>(options => {
                 options.UseMySQL(Configuration["ConnectionStrings:Default"]);
             });
+
+            services.AddScoped<ILoginService, LoginService>();
 
 
 

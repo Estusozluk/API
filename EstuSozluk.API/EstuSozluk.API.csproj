@@ -30,10 +30,20 @@
     <None Remove="MySql.Data.EntityFrameworkCore" />
     <None Remove="Newtonsoft.Json" />
     <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+    <None Remove="Services\" />
+    <None Remove="Services\Abstracts\" />
+    <None Remove="Services\Concretes\" />
+    <None Remove="Models\Dtos\" />
+    <None Remove="Models\Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Repositories\" />
     <Folder Include="Models\" />
+    <Folder Include="Services\" />
+    <Folder Include="Services\Abstracts\" />
+    <Folder Include="Services\Concretes\" />
+    <Folder Include="Models\Dtos\" />
+    <Folder Include="Models\Mappers\" />
   </ItemGroup>
   <PropertyGroup>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>

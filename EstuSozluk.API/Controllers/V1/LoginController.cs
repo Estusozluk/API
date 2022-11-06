@@ -7,6 +7,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using EstuSozluk.API.Models;
+using EstuSozluk.API.Services.Abstracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -21,10 +22,12 @@ namespace EstuSozluk.API.Controllers.V1
     public class LoginController : ControllerBase
     {
         private IConfiguration _config;
+        private ILoginService _LoginService;
 
-        public LoginController(IConfiguration config) {
+        public LoginController(IConfiguration config, ILoginService loginService) {
 
             _config = config;
+            _LoginService = loginService;
 
         }
         /*
@@ -75,5 +78,8 @@ namespace EstuSozluk.API.Controllers.V1
 
         }
         */
+
+        
+
     }
 }
