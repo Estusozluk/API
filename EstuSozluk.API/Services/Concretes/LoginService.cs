@@ -12,11 +12,13 @@ namespace EstuSozluk.API.Services.Concretes
     public class LoginService : ILoginService
     {
 
-        EstuSozlukContext _estuSozlukContext; 
+        EstuSozlukContext _estuSozlukContext;
+        IAuthenticationService _authenticationService;
 
-        public LoginService(EstuSozlukContext context)
+        public LoginService(EstuSozlukContext context, IAuthenticationService authenticationService)
         {
             _estuSozlukContext = context;
+            _authenticationService = authenticationService;
         }
 
         public bool CheckIfUserExists(String username)
@@ -27,14 +29,15 @@ namespace EstuSozluk.API.Services.Concretes
            
         }
 
-        public User Login(UserLoginDto UserLoginDto)
+        public object Login(UserLoginDto UserLoginDto)
         {
-           
 
+            User user = _estuSozlukContext.Users.Where(e => e.username == UserLoginDto.username && e.password == UserLoginDto.password).First();
+            string token = _authenticationService.CreateToken(UserLoginDto);
             
 
 
-            return _estuSozlukContext.Users.Where(e => e.username == UserLoginDto.username && e.password == UserLoginDto.password).First();
+            return new { user = user, token = token };
         }
 
         public User SaveUser(UserRegistrationDto user)

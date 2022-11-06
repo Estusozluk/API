@@ -1,4 +1,5 @@
 using System.Text;
+using EstuSozluk.API.Middlewares;
 using EstuSozluk.API.Repositories;
 using EstuSozluk.API.Services.Abstracts;
 using EstuSozluk.API.Services.Concretes;
@@ -12,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi.Models;
 using MySql.Data.MySqlClient;
 using MySqlConnector.Logging;
 using Serilog;
@@ -93,6 +95,7 @@ namespace EstuSozluk.API
             });
 
             services.AddScoped<ILoginService, LoginService>();
+            services.AddScoped<IAuthenticationService, AuthenticationService>();
 
 
 
@@ -130,12 +133,15 @@ namespace EstuSozluk.API
             });
 
 
+            app.UseMiddleware<JwtMiddleware>();
+
             app.UseSwagger();
             //app.UseSwaggerUI(options =>
             //{
             //    options.SwaggerEndpoint("/swagger/v1/swagger.yaml", "V1");
             //    options.SwaggerEndpoint("/swagger/v2/swagger.yaml", "V2");
             //});
+
 
 
             app.UseRouting();

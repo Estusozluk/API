@@ -10,7 +10,7 @@ namespace EstuSozluk.API.Services.Abstracts
 
         public bool CheckIfUserExists(String username);
         public User SaveUser(UserRegistrationDto user);
-        public User Login(UserLoginDto UserLoginDto);
+        public object Login(UserLoginDto UserLoginDto);
 
 
 
