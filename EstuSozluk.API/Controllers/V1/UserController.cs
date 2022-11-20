@@ -33,7 +33,7 @@ namespace EstuSozluk.API.Controllers.V1
 
         [Route("api/[controller]/{username}")]
         [HttpGet]
-        [Authorize]
+       
         public IActionResult GetUser(string username)
         {
             var CheckUser = _LoginService.CheckIfUserExists(username);
@@ -48,6 +48,7 @@ namespace EstuSozluk.API.Controllers.V1
             return Ok(_LoginService.SaveUser(user));
         }
 
+        
         [Route("api/[controller]/login")]
         [HttpPost]
         

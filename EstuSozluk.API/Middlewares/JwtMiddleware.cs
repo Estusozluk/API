@@ -64,8 +64,8 @@ namespace EstuSozluk.API.Middlewares
                 Console.WriteLine(userUserName);
                 Console.WriteLine(userCanpost);
 
-                User user = estuSozlukContext.Users.Where(e => e.email == userEmail && e.username == userUserName).First();
-
+                User user = estuSozlukContext.Users.Where(e => e.email == userEmail && e.username == userUserName).First();     
+                
                 if(user.email == userEmail && userUserName == user.username)
                 {
                     // attach user to context on successful jwt validation

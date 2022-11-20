@@ -96,6 +96,7 @@ namespace EstuSozluk.API
 
             services.AddScoped<ILoginService, LoginService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IEntryService, EntryService>();
 
 
 

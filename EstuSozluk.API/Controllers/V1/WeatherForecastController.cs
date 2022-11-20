@@ -45,7 +45,7 @@ namespace EstuSozluk.API.Controllers.V1
                     e.permissions,
                     Followers = e.Followed.Select(e => e.User1.username).ToList(),
                     Following = e.Following.Select(e => e.User2.username).ToList(),
-                    LikedEntries = e.LikedEntries.Select(e => new { e.entry.entryId, e.entry.content }).ToList()
+                    LikedEntries = e.LikedEntries.Select(e => new { e.entry.entryid, e.entry.content }).ToList()
                 }).First();
 
             

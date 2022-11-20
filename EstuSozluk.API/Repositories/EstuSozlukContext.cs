@@ -17,6 +17,19 @@ namespace EstuSozluk.API.Repositories
             modelBuilder.Entity<User>()
                 .HasKey(e => e.userid);
 
+            modelBuilder.Entity<Entry>()
+                .HasKey(e => e.entryid);
+
+            modelBuilder.Entity<Entry>()
+                .Property(e => e.writedate).HasDefaultValueSql("getDate()");
+            
+            modelBuilder.Entity<Entry>()
+                .Property(e => e.editdate).HasDefaultValueSql("getDate()");
+            
+            
+
+          
+
             modelBuilder.Entity<User>()
             .HasMany(e => e.entries)
             .WithOne(t => t.User);
