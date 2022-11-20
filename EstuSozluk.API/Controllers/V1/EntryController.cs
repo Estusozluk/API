@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 namespace EstuSozluk.API.Controllers.V1
 {
     [ApiController]
+    [Route("api/[controller]")]
     public class EntryController : ControllerBase
     {
         // GET
@@ -25,23 +26,25 @@ namespace EstuSozluk.API.Controllers.V1
             _entryService = entryService;
             _estuSozlukContext = estuSozlukContext;
         }
-        [Route("api/[controller]")]
+        [HttpGet]
+        public IActionResult GetAllEntries()
+        {
+            return Ok(_entryService.GetAllEntries());
+        }
         [HttpPost]
         [Authorize]
         public IActionResult AddNewEntry([FromBody] EntryDto entry)
         {
-            Console.WriteLine("----->" + entry.userid);
+           
           
           return Ok(_entryService.AddEntry(entry));
         }
 
-        [Route("api/[controller]/{entryid}")]
-        [HttpGet]
+        [HttpGet("{entryid}")]
         public IActionResult GetEntryById(int entryid)
         {
-            Console.WriteLine("------------------>>>>>>" + _estuSozlukContext.Entries.Select(e => e.content));
-            Console.WriteLine("------------------>>>>>>" +_estuSozlukContext.Users);
             return Ok(_entryService.GetEntryById(entryid));
         }
+        
     }
 }

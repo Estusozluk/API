@@ -38,7 +38,7 @@ namespace EstuSozluk.API.Services.Concretes
 
         public List<Entry> GetAllEntries()
         {
-            throw new System.NotImplementedException();
+            return _estuSozlukContext.Entries.Select(e => e).ToList();
         }
     }
 }

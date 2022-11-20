@@ -146,6 +146,7 @@ namespace EstuSozluk.API
 
 
             app.UseRouting();
+            
 
             app.UseAuthorization();
 
@@ -153,6 +154,7 @@ namespace EstuSozluk.API
             {
                 endpoints.MapControllers();
                 endpoints.MapControllers();
+               
             });
         }
     }
