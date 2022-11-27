@@ -12,6 +12,8 @@ namespace EstuSozluk.API.Services.Abstracts
         public User SaveUser(UserRegistrationDto user);
         public object Login(UserLoginDto UserLoginDto);
 
+        //public object GetUserByUsername(String Username);
+
 
 
 

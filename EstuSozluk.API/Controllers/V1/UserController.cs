@@ -57,7 +57,15 @@ namespace EstuSozluk.API.Controllers.V1
         
         public IActionResult LoginUser([FromBody] UserLoginDto user)
         {
-            return Ok(_LoginService.Login(user));
+            object response = _LoginService.Login(user);
+            if(response == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(response);
+            }
         }
 
 
