@@ -37,7 +37,7 @@ namespace EstuSozluk.API.Services.Concretes
                     new[]
                     { new Claim("username", user.username.ToString()),
                       new Claim("email", user.email.ToString()),
-                      new Claim("canpost", user.permissions.canpost == 1 ? "true" : "false" ),
+                      
                        }
                     ),
                 Expires = DateTime.UtcNow.AddMinutes(5),

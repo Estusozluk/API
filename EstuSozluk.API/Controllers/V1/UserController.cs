@@ -7,6 +7,7 @@ using EstuSozluk.API.Models;
 using EstuSozluk.API.Models.Dtos;
 using EstuSozluk.API.Services.Abstracts;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
@@ -34,6 +35,7 @@ namespace EstuSozluk.API.Controllers.V1
         [Route("api/[controller]/{username}")]
         [HttpGet]
        
+       
         public IActionResult GetUser(string username)
         {
             var CheckUser = _LoginService.CheckIfUserExists(username);
@@ -43,6 +45,7 @@ namespace EstuSozluk.API.Controllers.V1
 
         [Route("api/[controller]")]
         [HttpPost]
+       
         public IActionResult RegisterUser([FromBody] UserRegistrationDto user)
         {
             return Ok(_LoginService.SaveUser(user));

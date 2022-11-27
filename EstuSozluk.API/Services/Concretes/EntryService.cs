@@ -30,8 +30,7 @@ namespace EstuSozluk.API.Services.Concretes
 
         public Entry GetEntryById(int EntryId)
         {
-            Console.WriteLine("-************" + _estuSozlukContext.Entries);
-            Console.WriteLine("-************" + _estuSozlukContext.Users);
+            
             return _estuSozlukContext.Entries.Where(e => e.entryid == EntryId).First();
             
         }
