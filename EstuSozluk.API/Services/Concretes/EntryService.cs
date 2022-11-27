@@ -6,6 +6,7 @@ using EstuSozluk.API.Models.Dtos;
 using EstuSozluk.API.Models.Mappers;
 using EstuSozluk.API.Repositories;
 using EstuSozluk.API.Services.Abstracts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace EstuSozluk.API.Services.Concretes
@@ -33,6 +34,25 @@ namespace EstuSozluk.API.Services.Concretes
             
             return _estuSozlukContext.Entries.Where(e => e.entryid == EntryId).First();
             
+        }
+
+        public object GetFirstEntryOfTitle()
+        {
+
+
+            var a = _estuSozlukContext.Entries
+                .Include(e=> e.LikedEntries)
+                .Select(e => e)
+                .ToList()
+                .GroupBy(q => q.titlename)
+                .ToDictionary(e=> e.Key, e => 
+                    e.Select(q => new { titleData = q, likeCount = q.LikedEntries.Count})
+                    .OrderByDescending(asd=>asd.likeCount)
+                    .First()
+                );
+
+            return a;
+
         }
 
         public List<Entry> GetAllEntries()

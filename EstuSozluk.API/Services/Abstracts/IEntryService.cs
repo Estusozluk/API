@@ -10,8 +10,11 @@ namespace EstuSozluk.API.Services.Abstracts
         public Entry AddEntry(EntryDto entry);
         public Entry GetEntryById(int EntryId);
         public List<Entry> GetAllEntries();
-        
-        
+
+        public object GetFirstEntryOfTitle();
+
+
+
 
     }
 }

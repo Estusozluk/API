@@ -78,8 +78,13 @@ namespace EstuSozluk.API.Services.Concretes
                    Following = e.Following.Select(e => e.User2.username).ToList(),
                    LikedEntries = e.LikedEntries.Select(e => new { e.entry.entryid, e.entry.content }).ToList(),
                    DisLikedEntries = e.DislikedEntries.Select(e => new { e.entry.entryid, e.entry.content }).ToList()
-               }).First();
+               }).FirstOrDefault();
 
+            if (userData == null)
+            {
+                return null;
+            }
+                
             IEnumerable<string> badies = userData.Following.Intersect(userData.Followers);
 
             string token = _authenticationService.CreateToken(UserLoginDto);
