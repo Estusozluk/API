@@ -1,4 +1,4 @@
-﻿using EstuSozluk.API.Models;
+using EstuSozluk.API.Models;
 using EstuSozluk.API.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

@@ -36,28 +36,25 @@ namespace EstuSozluk.API.Services.Concretes
             
         }
 
+        public List<Entry> GetAllEntries()
+        {
+            return _estuSozlukContext.Entries.Select(e => e).ToList();
+        }
+
+
         public object GetFirstEntryOfTitle()
         {
 
-
-            var a = _estuSozlukContext.Entries
+            return _estuSozlukContext.Entries
                 .Include(e=> e.LikedEntries)
                 .Select(e => e)
                 .ToList()
                 .GroupBy(q => q.titlename)
                 .ToDictionary(e=> e.Key, e => 
                     e.Select(q => new { titleData = q, likeCount = q.LikedEntries.Count})
-                    .OrderByDescending(asd=>asd.likeCount)
-                    .First()
+                        .OrderByDescending(asd=>asd.likeCount)
+                        .First()
                 );
-
-            return a;
-
-        }
-
-        public List<Entry> GetAllEntries()
-        {
-            return _estuSozlukContext.Entries.Select(e => e).ToList();
         }
     }
 }

@@ -45,13 +45,6 @@ namespace EstuSozluk.API.Controllers.V1
         {
             return Ok(_entryService.GetEntryById(entryid));
         }
-
-        [HttpGet("titles")]
-
-        public IActionResult GetTities()
-        {
-            return Ok(_entryService.GetFirstEntryOfTitle());
-        }
-
+        
     }
 }

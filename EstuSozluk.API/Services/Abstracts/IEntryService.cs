@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using EstuSozluk.API.Models;
 using EstuSozluk.API.Models.Dtos;
@@ -12,7 +13,6 @@ namespace EstuSozluk.API.Services.Abstracts
         public List<Entry> GetAllEntries();
 
         public object GetFirstEntryOfTitle();
-
 
 
 
