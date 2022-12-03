@@ -39,7 +39,7 @@ namespace EstuSozluk.API.Controllers.V1
        
         public IActionResult GetUser(string username)
         {
-            var CheckUser = _LoginService.CheckIfUserExists(username);
+            var CheckUser = _LoginService.GetUser(username);
             return Ok(CheckUser);
         }
 

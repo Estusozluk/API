@@ -23,12 +23,23 @@ namespace EstuSozluk.API.Services.Concretes
             _authenticationService = authenticationService;
         }
 
-        public bool CheckIfUserExists(String username)
+        public User GetUser(String username)
         {
 
-            return _estuSozlukContext.Users.Where(e => e.username == username).Count() > 0;
+            var checkIfUserExists = _estuSozlukContext.Users.Where(e => e.username == username).Count();
 
-           
+            if (checkIfUserExists > 0)
+            {
+                return _estuSozlukContext.Users.Select(e => e).First();
+            }
+            else
+            {
+                return null;
+            }
+
+     
+
+
         }
 
         //public object GetUserByUsername(string Username)
