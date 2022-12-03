@@ -71,6 +71,7 @@ namespace EstuSozluk.API.Services.Concretes
             var userData = _estuSozlukContext.Set<User>().Where(e => e.username == UserLoginDto.username && e.password == UserLoginDto.password)
                .Select(e => new
                {
+                   e.userid,
                    e.username,
                    e.email,
                    e.permissions,
@@ -86,6 +87,7 @@ namespace EstuSozluk.API.Services.Concretes
 
             return new
             {
+                userData.userid,
                 userData.username,
                 userData.email,
                 userData.permissions,
@@ -106,6 +108,19 @@ namespace EstuSozluk.API.Services.Concretes
             _estuSozlukContext.Users.Add(userToSave);
             _estuSozlukContext.SaveChanges();
             return userToSave;
+        }
+
+        public Followships Follow(FollowshipsDto followshipsDto)
+        {
+
+            Followships followshipToSave = FollowshipMapper.FollowshipsMapper(followshipsDto);
+
+            _estuSozlukContext.Followships.Add(followshipToSave);
+            _estuSozlukContext.SaveChanges();
+
+            return followshipToSave;
+
+            
         }
     }
 }
