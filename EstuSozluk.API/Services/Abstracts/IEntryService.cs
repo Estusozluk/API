@@ -11,9 +11,13 @@ namespace EstuSozluk.API.Services.Abstracts
         public Entry AddEntry(EntryDto entry);
         public Entry GetEntryById(int EntryId);
         public List<Entry> GetAllEntries();
+
         public List<Entry> GetEntryByUser(int userId);
 
-        public object GetEntriesByTitle();
+
+
+        public object GetFirstEntryOfTitle();
+
 
 
 

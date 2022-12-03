@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using EstuSozluk.API.Models;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;

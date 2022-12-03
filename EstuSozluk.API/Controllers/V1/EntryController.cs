@@ -58,7 +58,7 @@ namespace EstuSozluk.API.Controllers.V1
         public IActionResult GetEntriesByTitle()
         {
 
-            return Ok(_entryService.GetEntriesByTitle());
+            return Ok(_entryService.GetFirstEntryOfTitle());
         }
 
      
