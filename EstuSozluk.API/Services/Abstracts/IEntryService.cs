@@ -20,6 +20,10 @@ namespace EstuSozluk.API.Services.Abstracts
 
         public List<Entry> GetEntryByTitleName(string title);
 
+        public LikedEntries LikeEntry(LikedEntriesDto likedEntriesDto);
+
+        public DislikedEntries DislikeEntry(DislikedEntriesDto dislikedEntriesDto);
+
 
 
 

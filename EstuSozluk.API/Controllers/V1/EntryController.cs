@@ -70,8 +70,20 @@ namespace EstuSozluk.API.Controllers.V1
             return Ok(_entryService.GetEntryByTitleName(title));
         }
 
-     
-        
-        
+        [HttpPost("like")]
+        public IActionResult LikeEntry([FromBody] LikedEntriesDto likedEntriesDto)
+        {
+            return Ok(_entryService.LikeEntry(likedEntriesDto));
+        }
+
+        [HttpPost("dislike")]
+        public IActionResult DislikeEntry([FromBody] DislikedEntriesDto dislikedEntriesDto)
+        {
+            return Ok(_entryService.DislikeEntry(dislikedEntriesDto));
+        }
+
+
+
+
     }
 }
