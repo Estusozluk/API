@@ -69,22 +69,39 @@ namespace EstuSozluk.API.Services.Concretes
         public List<Entry> GetEntryByUser(int userId)
         {
 
+
             return _estuSozlukContext.Entries.Where(e => e.userid == userId).ToList();
 
 
 
         }
 
+        public object GetLikedEntryByUser(int userid)
+        {
+            return _estuSozlukContext.LikedEntries.Where(e => e.userid == userid)
+                .Select(e => new { e.entry.titlename, e.entry.content }).ToList();
+        }
+
+        public object GetDislikedEntryByUser(int userid)
+        {
+            return _estuSozlukContext.DislikedEntries.Where(e => e.userid == userid)
+                .Select(e => new { e.entry.titlename, e.entry.content }).ToList();
+            
+        }
+        
+        
+        
+        
+
         public List<String> GetTitles()
         {
             return _estuSozlukContext.Entries.Select(e => e.titlename).Distinct().ToList();
         }
 
-        public List<Entry> GetEntryByTitleName(string title)
+        public object GetEntryByTitleName(string title)
         {
-            return _estuSozlukContext.Entries.Include(e => e.User)
-                .Where(e => e.titlename == title)
-                .OrderBy(e => e.writedate)
+            return _estuSozlukContext.Entries.Where(e => e.titlename == title)
+                .Select(e => new {e, likeCount = e.LikedEntries.Count, dislikeCount = e.DislikedEntries.Count, user = e.User.username })
                 .ToList();
         }
 
@@ -109,7 +126,7 @@ namespace EstuSozluk.API.Services.Concretes
         public DislikedEntries DislikeEntry(DislikedEntriesDto dislikedEntriesDto)
         {
             DislikedEntries dislikedEntry = DislikedEntriesMapper.GetDislikedEntriesFromDto(dislikedEntriesDto);
-            LikedEntries likedEntry = new LikedEntries();
+            
 
             var checkIfLikeExists =_estuSozlukContext.LikedEntries.Where(e => e.likedentryid == dislikedEntry.dislikedentryid & e.userid == dislikedEntry.userid).FirstOrDefault();
 

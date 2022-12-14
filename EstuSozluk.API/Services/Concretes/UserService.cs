@@ -26,18 +26,19 @@ namespace EstuSozluk.API.Services.Concretes
         public User GetUser(String username)
         {
 
-            var checkIfUserExists = _estuSozlukContext.Users.Where(e => e.username == username).Count();
+            var checkIfUserExists = _estuSozlukContext.Users.Where(e => e.username == username).
+                FirstOrDefault();
 
-            if (checkIfUserExists > 0)
+            if (checkIfUserExists != null)
             {
-                return _estuSozlukContext.Users.Select(e => e).First();
+                return checkIfUserExists;
             }
             else
             {
                 return null;
             }
 
-     
+
 
 
         }
@@ -88,8 +89,8 @@ namespace EstuSozluk.API.Services.Concretes
                    e.permissions,
                    Followers = e.Followed.Select(e => e.User1.username).ToList(),
                    Following = e.Following.Select(e => e.User2.username).ToList(),
-                   LikedEntries = e.LikedEntries.Select(e => new { e.entry.entryid, e.entry.content }).ToList(),
-                   DisLikedEntries = e.DislikedEntries.Select(e => new { e.entry.entryid, e.entry.content }).ToList()
+                   LikedEntries = e.LikedEntries.Select(e => new { e.entry.titlename, e.entry.content }).ToList(),
+                   DisLikedEntries = e.DislikedEntries.Select(e => new { e.entry.titlename, e.entry.content }).ToList()
                }).First();
 
             IEnumerable<string> badies = userData.Following.Intersect(userData.Followers);
