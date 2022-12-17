@@ -14,11 +14,19 @@ namespace EstuSozluk.API.Services.Abstracts
 
         public List<Entry> GetEntryByUser(int userId);
 
+        public object GetLikedEntryByUser(int userid);
+
+        public object GetDislikedEntryByUser(int userid);
+
         public List<string> GetTitles();
 
         public object GetFirstEntryOfTitle();
 
-        public List<Entry> GetEntryByTitleName(string title);
+        public object GetEntryByTitleName(string title);
+
+        public LikedEntries LikeEntry(LikedEntriesDto likedEntriesDto);
+
+        public DislikedEntries DislikeEntry(DislikedEntriesDto dislikedEntriesDto);
 
 
 

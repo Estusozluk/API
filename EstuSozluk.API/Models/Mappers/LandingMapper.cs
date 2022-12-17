@@ -9,6 +9,8 @@ namespace EstuSozluk.API.Models.Mappers
 
             LandingPageResponse response = new LandingPageResponse();
 
+            response.entryid = entry.entryid;
+
             response.titlename = entry.titlename;
             response.content = entry.content;
             response.writedate = entry.writedate;

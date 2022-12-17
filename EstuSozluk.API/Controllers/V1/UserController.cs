@@ -71,7 +71,7 @@ namespace EstuSozluk.API.Controllers.V1
 
         [Route("api/[controller]/follow")]
         [HttpPost]
-
+  
         public IActionResult FollowUser([FromBody] FollowshipsDto followshipsDto)
         {
             return Ok(_LoginService.Follow(followshipsDto));

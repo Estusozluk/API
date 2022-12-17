@@ -50,6 +50,20 @@ namespace EstuSozluk.API.Controllers.V1
             return Ok(_entryService.GetEntryByUser(userid));
         }
 
+        [HttpGet("user/liked/{userid}")]
+
+        public IActionResult GetLikedEntryByUser(int userid)
+        {
+            return Ok(_entryService.GetLikedEntryByUser(userid));
+        }
+        
+        [HttpGet("user/disliked/{userid}")]
+
+        public IActionResult GetDislikedEntryByUser(int userid)
+        {
+            return Ok(_entryService.GetDislikedEntryByUser(userid));
+        }
+
         [HttpGet("landing")]
         public IActionResult GetEntriesByTitle()
         {
@@ -70,8 +84,22 @@ namespace EstuSozluk.API.Controllers.V1
             return Ok(_entryService.GetEntryByTitleName(title));
         }
 
-     
-        
-        
+        [HttpPost("like")]
+        [Authorize]
+        public IActionResult LikeEntry([FromBody] LikedEntriesDto likedEntriesDto)
+        {
+            return Ok(_entryService.LikeEntry(likedEntriesDto));
+        }
+
+        [HttpPost("dislike")]
+        [Authorize]
+        public IActionResult DislikeEntry([FromBody] DislikedEntriesDto dislikedEntriesDto)
+        {
+            return Ok(_entryService.DislikeEntry(dislikedEntriesDto));
+        }
+
+
+
+
     }
 }
