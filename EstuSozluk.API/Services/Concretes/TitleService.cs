@@ -3,7 +3,6 @@ using EstuSozluk.API.Models.Mappers;
 using EstuSozluk.API.Repositories;
 using EstuSozluk.API.Services.Abstracts;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -19,11 +18,6 @@ namespace EstuSozluk.API.Services.Concretes
         {
             _estuSozlukContext = estuSozlukContext;
             _loginService = loginService;
-        }
-
-        public IEnumerable<string> GetTitles()
-        {
-            return _estuSozlukContext.Entries.Select(e => e.titlename).Distinct().ToList();
         }
 
         public IEnumerable<string> GetAllTitlesStartsWith(string StartsWith)
