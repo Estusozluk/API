@@ -1,8 +1,4 @@
-using System;
-using System.Linq;
-using EstuSozluk.API.Models;
 using EstuSozluk.API.Models.Dtos;
-using EstuSozluk.API.Models.Mappers;
 using EstuSozluk.API.Repositories;
 using EstuSozluk.API.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
@@ -19,7 +15,6 @@ namespace EstuSozluk.API.Controllers.V1
         private IEntryService _entryService;
         private EstuSozlukContext _estuSozlukContext;
 
-
         public EntryController(IConfiguration configuration, IEntryService entryService, EstuSozlukContext estuSozlukContext)
         {
             _configuration = configuration;
@@ -35,12 +30,8 @@ namespace EstuSozluk.API.Controllers.V1
         [Authorize]
         public IActionResult AddNewEntry([FromBody] EntryDto entry)
         {
-           
-          
-          return Ok(_entryService.AddEntry(entry));
+            return Ok(_entryService.AddEntry(entry));
         }
-
-       
 
         [HttpGet("user/{userid}")]
 
@@ -56,32 +47,12 @@ namespace EstuSozluk.API.Controllers.V1
         {
             return Ok(_entryService.GetLikedEntryByUser(userid));
         }
-        
+
         [HttpGet("user/disliked/{userid}")]
 
         public IActionResult GetDislikedEntryByUser(int userid)
         {
             return Ok(_entryService.GetDislikedEntryByUser(userid));
-        }
-
-        [HttpGet("landing")]
-        public IActionResult GetEntriesByTitle()
-        {
-
-            return Ok(_entryService.GetFirstEntryOfTitle());
-        }
-
-
-        [HttpGet("titles")]
-        public IActionResult GetTitles()
-        {
-            return Ok(_entryService.GetTitles());
-        }
-
-        [HttpGet("{title}")]
-        public IActionResult GetEntriesByTitleName(string title)
-        {
-            return Ok(_entryService.GetEntryByTitleName(title));
         }
 
         [HttpPost("like")]
@@ -97,9 +68,5 @@ namespace EstuSozluk.API.Controllers.V1
         {
             return Ok(_entryService.DislikeEntry(dislikedEntriesDto));
         }
-
-
-
-
     }
 }
