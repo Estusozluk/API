@@ -20,14 +20,10 @@ namespace EstuSozluk.API.Services.Concretes
             _loginService = loginService;
         }
 
-        public IEnumerable<string> GetTitles()
-        {
-            return _estuSozlukContext.Entries.Select(e => e.titlename).Distinct().ToList();
-        }
-
         public IEnumerable<string> GetAllTitlesStartsWith(string StartsWith)
         {
             return _estuSozlukContext.Entries
+                .Where(q => q.titlename.StartsWith(StartsWith))
                 .GroupBy(e => e.titlename)
                 .OrderByDescending(group => group.Count())
                 .Select(e => e.Key);
