@@ -20,15 +20,19 @@ namespace EstuSozluk.API.Controllers.V1
             _estuSozlukContext = estuSozlukContext;
         }
 
-        [HttpGet("titles")]
-        public IActionResult GetTitles()
-        {
-            return Ok(_titleService.GetTitles());
-        }
+        //[HttpGet("titles")]
+        //public IActionResult GetTitles()
+        //{
+        //    return Ok(_titleService.GetTitles());
+        //}
 
         [HttpGet("titles")]
         public IActionResult GetAllEntries([FromQuery(Name = "StartingWith")] string StartingWith)
         {
+            if (StartingWith == null)
+            {
+                return Ok(_titleService.GetAllTitlesStartsWith(""));
+            }
             return Ok(_titleService.GetAllTitlesStartsWith(StartingWith));
         }
 

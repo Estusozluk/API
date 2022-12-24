@@ -3,6 +3,7 @@ using EstuSozluk.API.Models.Mappers;
 using EstuSozluk.API.Repositories;
 using EstuSozluk.API.Services.Abstracts;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -28,6 +29,7 @@ namespace EstuSozluk.API.Services.Concretes
         public IEnumerable<string> GetAllTitlesStartsWith(string StartsWith)
         {
             return _estuSozlukContext.Entries
+                .Where(q => q.titlename.StartsWith(StartsWith))
                 .GroupBy(e => e.titlename)
                 .OrderByDescending(group => group.Count())
                 .Select(e => e.Key);
