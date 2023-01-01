@@ -8,6 +8,7 @@ using EstuSozluk.API.Repositories;
 using EstuSozluk.API.Services.Abstracts;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Abstractions;
 
 namespace EstuSozluk.API.Services.Concretes
 {
@@ -133,6 +134,38 @@ namespace EstuSozluk.API.Services.Concretes
             return followshipToSave;
 
             
+        }
+
+        public object UpdateUser(int userid, UserUpdateDto UserUpdateDto)
+        {
+            User userUpdate = UserMapper.GetUserFromUserUpdateDto(UserUpdateDto);
+            var checkUser = _estuSozlukContext.Users.Where(e => e.userid == userid).FirstOrDefault();
+
+            if (checkUser != null)
+            {
+                if (UserUpdateDto.username != null)
+                {
+                    checkUser.username = UserUpdateDto.username;
+                } 
+                
+                if (UserUpdateDto.email != null)
+                {
+                    checkUser.email = UserUpdateDto.email;
+                }
+                
+                _estuSozlukContext.SaveChanges();
+
+
+                return checkUser;
+            }
+            
+            
+            
+            
+
+            return "User not updated!";
+
+
         }
         
         

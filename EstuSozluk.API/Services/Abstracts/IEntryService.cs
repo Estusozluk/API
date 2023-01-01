@@ -20,5 +20,7 @@ namespace EstuSozluk.API.Services.Abstracts
 
         public DislikedEntries DislikeEntry(DislikedEntriesDto dislikedEntriesDto);
 
+        public Entry DeleteEntry(int entryid);
+
     }
 }
