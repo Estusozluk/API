@@ -77,6 +77,15 @@ namespace EstuSozluk.API.Controllers.V1
             return Ok(_LoginService.Follow(followshipsDto));
         }
 
+        [Route("api/[controller]/update/{userid}")]
+        [HttpPut]
+        [Authorize]
+
+        public IActionResult UpdateUser(int userid, [FromBody] UserUpdateDto userUpdateDto)
+        {
+            return Ok(_LoginService.UpdateUser(userid, userUpdateDto));
+        }
+
 
 
         /*

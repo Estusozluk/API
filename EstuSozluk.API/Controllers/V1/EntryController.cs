@@ -68,5 +68,13 @@ namespace EstuSozluk.API.Controllers.V1
         {
             return Ok(_entryService.DislikeEntry(dislikedEntriesDto));
         }
+
+        [HttpDelete("delete/{entryid}")]
+        [Authorize]
+
+        public IActionResult DeleteEntry(int entryid)
+        {
+            return Ok(_entryService.DeleteEntry(entryid));
+        }
     }
 }
