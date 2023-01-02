@@ -57,6 +57,7 @@ namespace EstuSozluk.API.Services.Concretes
                     userData.Following,
                     FollowerCount = userData.Followers.Count,
                     FollowedCount = userData.Following.Count,
+                    badies = badies,
                     badieCount = badies.Count()
                 };
             }
